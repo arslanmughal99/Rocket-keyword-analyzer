@@ -1,0 +1,43 @@
+<app-topbar></app-topbar>
+
+<div class="main-home-div">
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <div class="home-component-center" *ngIf="!processing">
+    <p class="error-message animated bounceIn" *ngIf="!form.valid || !linkStatus">Please Enter a valid link</p>
+    <div class="row">
+      <div class="col input-field">
+
+        <div class="form-group">
+          <input type="url" class="input-text form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="https://yoursite.com..." ngModel name="link" #linkUrl="ngModel" autofocus>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row button-field justify-content-md-center">
+        <div class="col">
+          <button type="submit" class="submit-button btn btn-outline-light btn-sm"><strong>Analyze</strong></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</form>
+
+<div class="row logo-div">
+  <div class="col text-center"><img class="rocket-logo" src="assets/rocket-img.png"></div>
+</div>
+<!-- LOADING SPINER THAT SHOW PROGRESS -->
+<div class="text-center">
+  <div class="spinner-grow text-danger processing-spinner" role="status" *ngIf="processing">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+
+  <p class="text-center animated pulse slow infinite still-loading" *ngIf="stillLoading">Hold tight, Still igniting...</p>
+
+
+</div>

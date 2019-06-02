@@ -1,0 +1,74 @@
+.main-home-div{
+  overflow: hidden;
+}
+
+.row{
+  margin: 0;
+}
+
+
+.form-control{
+  background-color: #3B3B3B;
+  border-color: #3B3B3B;
+
+}
+
+
+
+.input-field{
+  position: absolute;
+  top: 48%;
+
+
+}
+
+.button-field{
+  position: absolute;
+  top: 57%;
+  left: 30%;
+}
+
+.input-text{
+  box-shadow: rgb(31, 30, 30) 1px 1px 2px;
+  color: white;
+}
+
+.submit-button{
+  border-color: #3B3B3B;
+
+
+}
+
+.error-message{
+  position: absolute;
+  align-self: center;
+  color: #F25757;
+  top: 240px;
+  left: 20px;
+}
+
+.processing-spinner{
+  background-color: #F25757;
+  margin-top: 5px;
+
+}
+
+.still-loading{
+  color: #fff;
+  -webkit-user-select: none;
+}
+
+
+.rocket-logo{
+  height: 100px;
+  width: auto;
+  margin-top: 35%;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+.logo-div{
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+
+}

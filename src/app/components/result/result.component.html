@@ -1,0 +1,42 @@
+<div class="result-header fixed-top">
+  <div class="row"><div class="col col-2"> <a (click)="onClickBack()"><img class="back-button" src="assets/back-button.png"></a>
+  </div>
+
+  <div class="col col-10 text-right text-white">
+    <p>Impression : <span class="total-count-kw">{{totalCount}}</span></p>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col col-12 input-field">
+        <div class="form-group">
+          <input type="url" class="input-text form-control"
+            placeholder="filter..." [(ngModel)]="searchString" (input)="onSearch(searchString)" autofocus/>
+        </div>
+      </div>
+</div>
+
+
+<div class="row labeling-row">
+  <div class="col col-3"> <p class="text-white">Keyword</p> </div>
+  <div class="col col-5 text-right"> <p class="text-white">Count</p> </div>
+  <div class="col col-3 text-right"> <p class="text-white">Percentage</p> </div>
+</div>
+</div>
+
+<div class="row result-div">
+  <div class="col">
+      <ul class="list-group">
+          <li class="list-item-custom animated bounceInUp list-group-item d-flex justify-content-between align-items-center" *ngFor="let keyword of filteredKwData">
+              {{keyword.Keyword}}
+              <div>
+                <span class="count-badge badge prevent-drag badge-danger badge-pill">{{keyword.count}}</span>
+                <span class="badge badge-danger prevent-drag badge-pill">{{(keyword.count / totalCount) | percent}}</span>
+              </div>
+          </li>
+      </ul>
+</div>
+</div>
+
+
+

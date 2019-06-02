@@ -1,0 +1,64 @@
+.result-div{
+  padding-top: 140px;
+}
+
+.list-item-custom{
+  background-color: #3B3B3B;
+  color: white;
+}
+
+.badge-danger{
+  background-color: #F25757;
+  color: #3B3B3B;
+}
+
+.count-badge{
+  margin-right: 50px;
+}
+
+.result-header{
+  padding-top: 20px;
+  background-color: #212121;
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+}
+
+.row{
+  margin: 0;
+}
+
+.back-button{
+  height: 15px;
+  width: auto;
+  margin-bottom: 5px;
+  -webkit-app-region: no-drag;
+  -webkit-user-drag: none;
+}
+
+.total-count-kw{
+  color: #F25757;
+}
+
+.prevent-drag{
+  -webkit-user-select: none;
+}
+
+.input-text{
+  box-shadow: rgb(31, 30, 30) 1px 1px 2px;
+  color: white;
+  -webkit-app-region: no-drag;
+  height: 30px;
+
+}
+
+
+.form-control{
+  background-color: #3B3B3B;
+  border-color: #3B3B3B;
+
+}
+
+
+.labeling-row{
+  margin-top: -10px;
+}

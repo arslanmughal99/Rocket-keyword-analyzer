@@ -1,0 +1,40 @@
+*{
+  overflow: hidden;
+}
+
+.close-button{
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  height: 15px;
+  width: auto;
+  -webkit-app-region: no-drag;
+
+
+}
+
+.close-col{
+  opacity: 1;
+  :hover{
+    opacity: 0.5;
+  }
+}
+
+.title-bar{
+  padding-top: 3px;
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+  // position: fixed top;
+  z-index: 100;
+  background-color: #212121;
+}
+
+.col{
+  opacity: 1;
+
+}
+
+.row{
+  margin: 0;
+}
+

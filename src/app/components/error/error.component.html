@@ -1,0 +1,25 @@
+<app-topbar></app-topbar>
+
+<div class="main-error-div">
+<div class="container animated bounceInUp">
+  <div class="row">
+    <div class="col text-center"><img src="assets/error-icon.png" class="error-icon"></div>
+  </div>
+  <div class="row">
+    <div class="col text-center text-white mt-3"><p>Something went wrong :(</p></div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <button class="back-to-home btn btn-outline-light btn-sm" (click)="onRouteBack()"><strong>Back</strong></button>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row animated bounceInUp error-logs-div">
+  <div class="col text-center">
+    <p class="text-white">ERROR REASON : <br/><span class="error-reason">{{errorReason.code}}</span></p>
+  </div>
+</div>
+</div>
