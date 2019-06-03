@@ -1,12 +1,13 @@
-<center>
-<img src="https://i.imgur.com/zUMhf2k.png"com"">
-</center>
-<center>
-<h1>ROCKET SEO</h1>
-<p>A minimal keyword analyzing desktop app<br>
+<div style="text-align:center">
+  <div style="text-align:center"></div>
+<img align="center" src="https://i.imgur.com/zUMhf2k.png"com"">
+
+
+<h1 align="center">ROCKET SEO</h1>
+<p align="center">A minimal keyword analyzing desktop app<br>
     for SEO ninjas.
 </p>
-</center>
+</div>
 
 ### Installation:
 
