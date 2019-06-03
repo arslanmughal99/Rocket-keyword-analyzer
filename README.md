@@ -1,8 +1,8 @@
-<div style="text-align:center">
+<div>
   
-  <span align="center">
-      <img align="center" src="https://i.imgur.com/zUMhf2k.png"com">
-  </span>
+  <p align="center">
+      <img src="https://i.imgur.com/zUMhf2k.png"com">
+  </p>
 
 
 <h1 align="center">ROCKET SEO</h1>
