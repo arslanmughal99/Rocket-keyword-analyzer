@@ -85,7 +85,7 @@
   },
   "dependencies": {
     "animate.css": "^3.7.1",
-    "bootstrap": "4.2.1",
+    "bootstrap": ">=4.3.1",
     "count-array-values": "^1.2.1",
     "input-validate": "^2.0.0",
     "jssoup": "0.0.10",
