@@ -9,21 +9,6 @@ var rules_1 = require("./rules");
 var excluded_1 = require("./excluded");
 var loader_1 = require("./loader");
 var rawHtmlText = '';
-// lagacy function to load html throw http request
-// dont gives true results for site that are using react.js, angular.js etc
-// function getHtml(siteUrl: string, callback) {
-//   request.get(siteUrl, (err, res, body) => {
-//     if (res.statusCode >= 400) {
-//       throw new Error('Cannot Reach Site');
-//     }
-//     callback(err, body);
-//   });
-// }
-function getHtml(siteUrl, callback) {
-    loader_1.default(siteUrl, function (rawHtmlString) {
-        callback(rawHtmlString.toString());
-    });
-}
 function parseHtml(htmlBody, cb) {
     var soup = new JSSoup(htmlBody);
     // itterate all JSSoup elements array to find interesting tags
@@ -39,11 +24,10 @@ function parseHtml(htmlBody, cb) {
             rawHtmlText += el.text + ' ';
         }
     });
-    cb(rawHtmlText.replace(/"|'/g, '').toLowerCase());
+    cb(rawHtmlText.replace(/"|'/g, '').toLowerCase()); // Some Keywords are wraped in "" || '' which will be replace with \s using this RegEx
 }
-function getProcessedData(siteUrl, callback) {
-    getHtml(siteUrl, function (body) {
-        // if (err) { callback(err, null); }
+function fromHTMLtoStringArray(siteUrl, callback) {
+    loader_1.default(siteUrl, function (body) {
         parseHtml(body, function (rawhtml) {
             var allKw = rawhtml.split(' ');
             callback(null, allKw, allKw.length);
@@ -60,9 +44,9 @@ function filterSymboles(allKwordList, callback) {
     });
     callback(keyWordCount);
 }
-function filterPrepositionsAndVerbs(prepoLsit, filterSymbole, callback) {
+function excludeKeywords(excludedKw, filterSymbole, callback) {
     var filteredPreo = _.filter(filterSymbole, function (el) {
-        var findPrep = _.find(prepoLsit, function (findKw) {
+        var findPrep = _.find(excludedKw, function (findKw) {
             if (findKw.toUpperCase() === el.Keyword.toUpperCase()) {
                 return findKw;
             }
@@ -73,6 +57,7 @@ function filterPrepositionsAndVerbs(prepoLsit, filterSymbole, callback) {
     });
     callback(filteredPreo);
 }
+// Sort result in descending count
 function sortData(finalKwList, callback) {
     var sortedList = _.sortBy(finalKwList, function (el) {
         return el.count;
@@ -82,22 +67,22 @@ function sortData(finalKwList, callback) {
 // only this function is exposed to app
 function getKeyDetail(siteUrl, callback) {
     try {
-        getProcessedData(siteUrl, function (err, all, totalKeyWords) {
+        fromHTMLtoStringArray(siteUrl, function (err, all, totalKeyWords) {
             if (err) {
                 throw err;
             }
             filterSymboles(all, function (filterdSymbol) {
-                filterPrepositionsAndVerbs(prepositions_1.default, filterdSymbol, function (finalData) {
+                excludeKeywords(prepositions_1.default, filterdSymbol, function (finalData) {
                     sortData(finalData, function (data) {
-                        rawHtmlText = '';
-                        callback(null, data, totalKeyWords);
+                        rawHtmlText = ''; // Reset temp Raw HTML holder to null
+                        callback(null, data, totalKeyWords); // if process successful err will null
                     });
                 });
             });
         });
     }
     catch (err) {
-        callback(err, null, null);
+        callback(err, null, null); // if process fail err will !null
     }
 }
 exports.default = getKeyDetail;

@@ -1,4 +1,4 @@
-const excluded = ['script', 'noscript'];
+const excluded = ['script', 'noscript']; // Add any valid HTMLtag Here to exclude
 
 
 

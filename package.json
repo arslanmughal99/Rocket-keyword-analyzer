@@ -1,11 +1,11 @@
 {
   "name": "rocket-seo",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Keyword Analyzer for webpages",
-  "homepage": "https://github.com/arslanmughal5566/Rocket-SEO",
+  "homepage": "https://github.com/arslanmughal5566/rocket-seo",
   "author": {
     "name": "Arslan",
-    "email": "arslanmughal9912@gmail.com"
+    "email": "arslanmughal5566@outlook.com"
   },
   "keywords": [
     "SEO",
@@ -15,7 +15,7 @@
     "Google SEO"
   ],
   "main": "main.js",
-  "private": true,
+  "private": false,
   "scripts": {
     "postinstall": "npm run postinstall:electron && electron-builder install-app-deps",
     "postinstall:web": "node postinstall-web",

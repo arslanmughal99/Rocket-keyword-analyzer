@@ -4,32 +4,13 @@ const JSSoup = require('jssoup').default;
 const coutArray = require('count-array-values');
 const validate = require('input-validate');
 
-import preposition from './prepositions';
+import unInterestedWords from './prepositions';
 import rules from './rules';
 import excluded from './excluded';
 import rawHtml from './loader';
 
 
 let rawHtmlText = '';
-
-// lagacy function to load html throw http request
-// dont gives true results for site that are using react.js, angular.js etc
-
-// function getHtml(siteUrl: string, callback) {
-//   request.get(siteUrl, (err, res, body) => {
-//     if (res.statusCode >= 400) {
-//       throw new Error('Cannot Reach Site');
-//     }
-//     callback(err, body);
-//   });
-// }
-
-function getHtml(siteUrl: string, callback) {
-  rawHtml(siteUrl, (rawHtmlString) => {
-    callback(rawHtmlString.toString());
-  });
-}
-
 
 function parseHtml(htmlBody, cb) {
   const soup = new JSSoup(htmlBody);
@@ -42,13 +23,12 @@ function parseHtml(htmlBody, cb) {
     // concatinating all text in one place
     if (!tag && el.string !== undefined) { rawHtmlText += el.text + ' '; }
   });
-  cb(rawHtmlText.replace(/"|'/g, '').toLowerCase());
+  cb(rawHtmlText.replace(/"|'/g, '').toLowerCase()); // Some Keywords are wraped in "" || '' which will be replace with \s using this RegEx
 }
 
 
-function getProcessedData(siteUrl: string , callback) {
-  getHtml(siteUrl, (body) => {
-    // if (err) { callback(err, null); }
+function fromHTMLtoStringArray(siteUrl: string , callback) {
+  rawHtml(siteUrl, (body) => {
     parseHtml(body, (rawhtml) => {
       const allKw = rawhtml.split(' ');
       callback(null, allKw, allKw.length);
@@ -67,9 +47,9 @@ function filterSymboles(allKwordList: string[], callback) {
 }
 
 
-function filterPrepositionsAndVerbs(prepoLsit: string[], filterSymbole,  callback) {
+function excludeKeywords(excludedKw: string[], filterSymbole,  callback) {
   const filteredPreo = _.filter(filterSymbole, (el) => {
-    const findPrep = _.find(prepoLsit, (findKw) => {
+    const findPrep = _.find(excludedKw, (findKw) => {
       if (findKw.toUpperCase() === el.Keyword.toUpperCase()) { return findKw; }
     });
     if (!findPrep) {
@@ -79,7 +59,7 @@ function filterPrepositionsAndVerbs(prepoLsit: string[], filterSymbole,  callbac
   callback(filteredPreo);
 }
 
-
+// Sort result in descending count
 function sortData(finalKwList: Object[], callback) {
   const sortedList = _.sortBy(finalKwList, (el) => {
     return el.count;
@@ -91,19 +71,19 @@ function sortData(finalKwList: Object[], callback) {
 // only this function is exposed to app
 export default function getKeyDetail(siteUrl: string, callback) {
   try {
-    getProcessedData(siteUrl, (err, all, totalKeyWords) => {
+    fromHTMLtoStringArray(siteUrl, (err, all, totalKeyWords) => { // Parse HTML To String Array
       if (err) { throw err; }
-      filterSymboles(all, (filterdSymbol) => {
-        filterPrepositionsAndVerbs(preposition, filterdSymbol, (finalData) => {
-          sortData(finalData, (data) => {
-            rawHtmlText = '';
-            callback(null, data, totalKeyWords);
+      filterSymboles(all, (filterdSymbol) => {          // Filter Keywords that are not valid words
+        excludeKeywords(unInterestedWords, filterdSymbol, (finalData) => {  // Exclude unneccessary Keywords like "The", "me", "you" ...
+          sortData(finalData, (data) => {   // Sort data with highes number of count first
+            rawHtmlText = '';               // Reset temp Raw HTML holder to null
+            callback(null, data, totalKeyWords); // if process successful err will null
           });
         });
       });
     });
   } catch (err) {
-    callback(err, null, null);
+    callback(err, null, null); // if process fail err will !null
   }
 
 }

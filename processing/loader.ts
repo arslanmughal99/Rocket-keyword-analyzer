@@ -41,6 +41,7 @@ export default function getRawHtml(siteUrl, callback) {
 }
 
 
+//  Register an IPC Event Emitter imidieatly
 (function () {
   ipcMain.on('any-err-view', (e) => {
     senderID = e.sender;

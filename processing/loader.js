@@ -34,6 +34,7 @@ function getRawHtml(siteUrl, callback) {
     });
 }
 exports.default = getRawHtml;
+//  Register an IPC Event Emitter imidieatly
 (function () {
     electron_1.ipcMain.on('any-err-view', function (e) {
         senderID = e.sender;
