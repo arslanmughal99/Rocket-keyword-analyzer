@@ -13,6 +13,19 @@ src/**/*.js
 CHANGELOG.md
 LICENSE.md
 
+# TypeScrit compiled files USER DEFINE
+excluded.js
+excluded.js.map
+loader.js
+loader.js.map
+prepositions.js
+prepositions.js.map
+rules.js
+rules.js.map
+process.js
+process.js.map
+
+
 # dependencies
 /node_modules
 
@@ -52,14 +65,3 @@ package-lock.json
 Thumbs.db
 
 
-# TypeScrit compiled files USER DEFINE
-excluded.js
-excluded.js.map
-loader.js
-loader.js.map
-prepositions.js
-prepositions.js.map
-rules.js
-rules.js.map
-process.js
-process.js.map
