@@ -88,8 +88,10 @@
     "bootstrap": ">=4.3.1",
     "count-array-values": "^1.2.1",
     "input-validate": "^2.0.0",
+    "jquery": "^3.4.1",
     "jssoup": "0.0.10",
     "lodash": "^4.17.11",
-    "ngx-bootstrap": "^4.2.0"
+    "ngx-bootstrap": "^4.2.0",
+    "popper.js": "^1.15.0"
   }
 }

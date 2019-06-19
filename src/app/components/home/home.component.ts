@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProcessService } from '../../services/process/process.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,12 +16,13 @@ export class HomeComponent implements OnInit {
   processing: Boolean;
   stillLoading: Boolean;
 
-  constructor(private process: ProcessService) {}
+  constructor(private process: ProcessService, private router: Router) {}
 
   ngOnInit() {
     this.linkStatus = true;
     this.processing = false;
     this.stillLoading = false;
+    // this.router.navigateByUrl('/offlinefile');
   }
 
   // Display "Hold Tight, Still loading" message after x seconds
@@ -33,11 +35,15 @@ export class HomeComponent implements OnInit {
     if (this.process.validateUrl(form.value.link)) {
       this.linkStatus = true;
       this.processing = true;
-      this.process.getSiteUrl(form.value.link);
+      this.process.getSiteUrl(form.value.link, false);
       this.checkStillLoading();
     } else {
       this.linkStatus = false;
     }
+  }
+
+  onGoOffline(){
+    this.router.navigateByUrl('/offlinefile');
   }
 
 }

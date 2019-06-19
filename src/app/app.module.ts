@@ -21,6 +21,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ResultComponent } from './components/result/result.component';
 import { ErrorComponent } from './components/error/error.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
+import { OfflineFileComponent } from './components/offline-file/offline-file.component';
+
 
 
 
@@ -36,7 +38,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     WebviewDirective,
     ResultComponent,
     ErrorComponent,
-    TopbarComponent
+    TopbarComponent,
+    OfflineFileComponent
 
   ],
   imports: [

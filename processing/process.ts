@@ -27,8 +27,8 @@ function parseHtml(htmlBody, cb) {
 }
 
 
-function fromHTMLtoStringArray(siteUrl: string , callback) {
-  rawHtml(siteUrl, (body) => {
+function fromHTMLtoStringArray(siteUrl: string, isLocal:boolean , callback) {
+  rawHtml(siteUrl, isLocal , (body) => {
     parseHtml(body, (rawhtml) => {
       const allKw = rawhtml.split(' ');
       callback(null, allKw, allKw.length);
@@ -69,9 +69,9 @@ function sortData(finalKwList: Object[], callback) {
 
 
 // only this function is exposed to app
-export default function getKeyDetail(siteUrl: string, callback) {
+export default function getKeyDetail(siteUrl: string, isLocal:boolean, callback) {
   try {
-    fromHTMLtoStringArray(siteUrl, (err, all, totalKeyWords) => { // Parse HTML To String Array
+    fromHTMLtoStringArray(siteUrl, isLocal, (err, all, totalKeyWords) => { // Parse HTML To String Array
       if (err) { throw err; }
       filterSymboles(all, (filterdSymbol) => {          // Filter Keywords that are not valid words
         excludeKeywords(unInterestedWords, filterdSymbol, (finalData) => {  // Exclude unneccessary Keywords like "The", "me", "you" ...

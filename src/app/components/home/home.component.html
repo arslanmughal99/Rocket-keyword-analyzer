@@ -22,8 +22,6 @@
       </div>
     </div>
   </div>
-
-
 </form>
 
 <div class="row logo-div">
@@ -38,6 +36,5 @@
 
 
   <p class="text-center animated pulse slow infinite still-loading" *ngIf="stillLoading">Hold tight, Still igniting...</p>
-
-
+  <button *ngIf="!processing" (click)="onGoOffline()" class="submit-button go-offline btn btn-outline-light btn-sm"><strong>Offline Mode</strong></button>
 </div>

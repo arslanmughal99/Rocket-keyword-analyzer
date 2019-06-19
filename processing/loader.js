@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
+var url = require("url");
 var loaderWindow;
 var senderID;
-function createloaderWin(siteUrl) {
+function createloaderWin(siteUrl, isLocal) {
     loaderWindow = new electron_1.BrowserWindow({
         height: electron_1.screen.getPrimaryDisplay().size.height,
         width: electron_1.screen.getPrimaryDisplay().size.width,
@@ -13,14 +14,28 @@ function createloaderWin(siteUrl) {
         },
         show: false
     });
-    loaderWindow.webContents.loadURL(siteUrl, null).then(function () {
-        loaderWindow.webContents.executeJavaScript('require("electron").ipcRenderer.send("html-ready", document.body.innerHTML);');
-    }).catch(function (err) {
-        senderID.send('yes-view-err', err);
-    });
+    if (isLocal) {
+        loaderWindow.webContents.loadURL(url.format({
+            pathname: siteUrl,
+            protocol: 'file:',
+            slashes: true
+        })).then(function () {
+            loaderWindow.webContents.executeJavaScript('require("electron").ipcRenderer.send("html-ready", document.body.innerHTML);')
+                .catch(function (err) {
+                senderID.send('yes-view-err', err);
+            });
+        });
+    }
+    if (!isLocal) {
+        loaderWindow.webContents.loadURL(siteUrl, null).then(function () {
+            loaderWindow.webContents.executeJavaScript('require("electron").ipcRenderer.send("html-ready", document.body.innerHTML);');
+        }).catch(function (err) {
+            senderID.send('yes-view-err', err);
+        });
+    }
 }
-function getRawHtml(siteUrl, callback) {
-    createloaderWin(siteUrl);
+function getRawHtml(siteUrl, isLocal, callback) {
+    createloaderWin(siteUrl, isLocal);
     loaderWindow.on('close', function () {
         loaderWindow = null;
     });

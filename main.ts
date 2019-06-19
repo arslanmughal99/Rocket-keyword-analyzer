@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen, ipcMain, webContents } from 'electron';
+import { app, BrowserWindow, screen, ipcMain, webContents, IpcMain } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import getKeyDetail from './processing/process';
@@ -87,9 +87,9 @@ try {
 
 
 
-ipcMain.on('siteUrl', (e, siteUrl) => {
+ipcMain.on('siteUrl', (e, isLocal:boolean,  siteUrl:string) => {
 
-  getKeyDetail(siteUrl, (err, data, totalKeyWords) => {
+  getKeyDetail(siteUrl, isLocal, (err, data, totalKeyWords) => {
     if (err) {
       e.sender.send('error-occure', err);
       return;

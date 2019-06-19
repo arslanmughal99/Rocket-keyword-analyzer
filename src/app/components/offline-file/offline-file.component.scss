@@ -1,0 +1,45 @@
+.main-div{
+    padding: 20px;
+    -webkit-user-select: none;
+}
+
+
+.fileicon-img{
+    -webkit-user-drag: none;
+}
+
+
+.submit-button{
+    border-color: #3B3B3B;
+  
+  
+  }
+
+.drop-text{
+    color: #F25757;
+}
+
+.des-text{
+    color: rgb(83, 83, 83);
+    text-align: center;
+    margin-top: 20px;
+}
+
+.drop-div{
+    padding: 10px;
+    height: 200px;
+    border-width: 2px;
+    border-color: #3B3B3B;
+    border-style: dashed;
+    margin-top: 45%;
+    border-radius: 25px;
+}
+
+.fileicon-img:hover{
+    opacity: 0.5;
+}
+
+.invalid-file-err{
+    color: #F25757;
+    margin-top: 10px;
+}

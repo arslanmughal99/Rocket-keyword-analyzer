@@ -18,9 +18,9 @@ export class ProcessService {
   constructor(private router: Router, private zone: NgZone) { }
 
 
-  processUrlSignal(url: string) {
+  processUrlSignal(url: string, isLocal:boolean = false) {
     ipcRenderer.send('any-err-view', null);
-    ipcRenderer.send('siteUrl', url);
+    ipcRenderer.send('siteUrl', isLocal ,url);
 
     ipcRenderer.once('error-occure', (e, err) => {
       this.removeAllListiners();
@@ -49,8 +49,8 @@ export class ProcessService {
       ipcRenderer.removeAllListeners('yes-view-err');
   }
 
-  getSiteUrl(url: string) {
-    this.processUrlSignal(url);
+  getSiteUrl(url: string, isLocal: boolean) {
+    this.processUrlSignal(url, isLocal);
   }
 
   get getKeywordData() {

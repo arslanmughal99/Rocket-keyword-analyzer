@@ -1,0 +1,16 @@
+<app-topbar></app-topbar>
+<div class="main-div">
+    <div class="drop-div" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)">
+        <p class="text-center drop-text">Drop your file here ...</p>
+        <p class="text-center"><img class="fileicon-img" src="assets/fileicon.png" alt=""></p>
+    </div>
+
+    <div class="des-div">
+        <p *ngIf="!isFileValid" class="text-center invalid-file-err">Not a valid file type :(</p>
+        <p class="des-text">Only valid html file and local website with lcoally linked files are allowed</p>
+    </div>
+
+    <p class="text-center">
+        <button (click)="onSwitchOnline()" class="submit-button btn btn-outline-light btn-sm"><strong>Online Mode</strong></button>
+    </p>
+</div>

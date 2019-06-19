@@ -26,8 +26,8 @@ function parseHtml(htmlBody, cb) {
     });
     cb(rawHtmlText.replace(/"|'/g, '').toLowerCase()); // Some Keywords are wraped in "" || '' which will be replace with \s using this RegEx
 }
-function fromHTMLtoStringArray(siteUrl, callback) {
-    loader_1.default(siteUrl, function (body) {
+function fromHTMLtoStringArray(siteUrl, isLocal, callback) {
+    loader_1.default(siteUrl, isLocal, function (body) {
         parseHtml(body, function (rawhtml) {
             var allKw = rawhtml.split(' ');
             callback(null, allKw, allKw.length);
@@ -65,9 +65,9 @@ function sortData(finalKwList, callback) {
     callback(sortedList);
 }
 // only this function is exposed to app
-function getKeyDetail(siteUrl, callback) {
+function getKeyDetail(siteUrl, isLocal, callback) {
     try {
-        fromHTMLtoStringArray(siteUrl, function (err, all, totalKeyWords) {
+        fromHTMLtoStringArray(siteUrl, isLocal, function (err, all, totalKeyWords) {
             if (err) {
                 throw err;
             }
